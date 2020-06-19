@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <RecipeDef>
+    <defName>Make_Gachapon</defName>
+    <label>deaw gacha figure</label>
+    <description>Pay silver to get a random gacha figure. Gambling time!</description>
+    <jobString>Getting gacha figure.</jobString>
+    <workSpeedStat>UnskilledLaborSpeed</workSpeedStat>
+    <!--<effectWorking>Tailor</effectWorking>
+		<soundWorking>Recipe_Tailor</soundWorking>-->
+    <recipeUsers>
+      <li>GachaMachine</li>
+    </recipeUsers>
+    <workSkill>Crafting</workSkill>
+    <workAmount>150</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Silver</li>
+          </thingDefs>
+        </filter>
+        <count>10</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Silver</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <Gachapon>1</Gachapon>
+    </products>
+  </RecipeDef>
+</Defs>

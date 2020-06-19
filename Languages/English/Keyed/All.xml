@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Things -->
+  <GachaponCollection_CollectionList>Collection sets</GachaponCollection_CollectionList>
+  <GachaponCollection_Set_Material>same material</GachaponCollection_Set_Material>
+  <GachaponCollection_Set_Animal>same animal</GachaponCollection_Set_Animal>
+  <GachaponCollection_Set_Predator>predators</GachaponCollection_Set_Predator>
+  <GachaponCollection_Set_Nuzzle>nuzzlers</GachaponCollection_Set_Nuzzle>
+  <GachaponCollection_Set_SizeSmall>small animals</GachaponCollection_Set_SizeSmall>
+  <GachaponCollection_Set_SizeLarge>large animals</GachaponCollection_Set_SizeLarge>
+  <GachaponCollection_Set_BiomeRare>from same rare biome ({0})</GachaponCollection_Set_BiomeRare>
+  <GachaponCollection_Set_BiomeCommon>from same biome ({0})</GachaponCollection_Set_BiomeCommon>
+  <GachaponCollection_Set_QualityLegendary>legendary</GachaponCollection_Set_QualityLegendary>
+  <GachaponCollection_Set_QualityMasterwork>masterwork</GachaponCollection_Set_QualityMasterwork>
+  <GachaponCollection_BeautyBonus>Beauty bonus: {0}</GachaponCollection_BeautyBonus>
+  <GachaponCollection_Incomplete>Collection incomplete</GachaponCollection_Incomplete>
+  <!-- Stats -->
+  <StatsReport_AnimalDesignMultiplier>Animal design multiplier</StatsReport_AnimalDesignMultiplier>
+
+</LanguageData>
