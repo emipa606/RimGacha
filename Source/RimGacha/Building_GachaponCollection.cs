@@ -42,7 +42,7 @@ public class Building_GachaponCollection : Building
     private static readonly FieldInfo FI_cachedAnimalCommonalities =
         typeof(BiomeDef).GetField("cachedAnimalCommonalities", BindingFlags.Instance | BindingFlags.NonPublic);
 
-    private readonly List<Building_Art_Gachapon> collection = new List<Building_Art_Gachapon>();
+    private readonly List<Building_Art_Gachapon> collection = [];
 
     private float cachedBaseBeauty;
 

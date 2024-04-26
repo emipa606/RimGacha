@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ThingDef ParentName="BuildingBase">
+    <thingClass>RimGacha.Building_Art_Gachapon</thingClass>
+    <defName>Gachapon</defName>
+    <label>figure</label>
+    <description>A gachapon. A small figure which comes in many different designs and variations. Collect them all!</description>
+    <graphicData>
+      <texPath>Things/Building/Art/GachaponBase</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+    </graphicData>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <fillPercent>0.2</fillPercent>
+    <passability>PassThroughOnly</passability>
+    <pathCost>35</pathCost>
+    <useHitPoints>true</useHitPoints>
+    <rotatable>true</rotatable>
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <Mass>0.3</Mass>
+      <Beauty>4</Beauty>
+      <WorkToMake>9000</WorkToMake>
+      <Flammability>1.0</Flammability>
+      <SellPriceFactor>1.05</SellPriceFactor>
+    </statBases>
+    <stuffCategories>
+      <li>Metallic</li>
+      <li>Woody</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <costStuffCount>5</costStuffCount>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsArt</li>
+    </thingCategories>
+    <comps>
+      <li>
+        <compClass>CompQuality</compClass>
+      </li>
+      <li>
+        <compClass>RimGacha.Comp_AnimalDesign</compClass>
+      </li>
+    </comps>
+  </ThingDef>
+</Defs>

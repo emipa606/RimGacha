@@ -6,7 +6,7 @@ using Verse;
 
 namespace RimGacha;
 
-public class WorldComp_BiomeManager : WorldComponent
+public class WorldComp_BiomeManager(World world) : WorldComponent(world)
 {
     private static readonly FieldInfo FI_cachedAnimalCommonalities =
         typeof(BiomeDef).GetField("cachedAnimalCommonalities", BindingFlags.Instance | BindingFlags.NonPublic);
@@ -17,10 +17,6 @@ public class WorldComp_BiomeManager : WorldComponent
     [Unsaved] private Dictionary<PawnKindDef, float> cachedGlobalAnimalCommonalities;
 
     [Unsaved] private float cachedGlobalAnimalCommonalitiesSum;
-
-    public WorldComp_BiomeManager(World world) : base(world)
-    {
-    }
 
     public int GlobalAnimalDefCount =>
         cachedGlobalAnimalCommonalities?.Count ?? 0;
@@ -75,13 +71,13 @@ public class WorldComp_BiomeManager : WorldComponent
     {
         CreateGlobalAnimalCacheIfNeeded();
         float result;
-        if (!cachedGlobalAnimalCommonalities.ContainsKey(animal))
+        if (!cachedGlobalAnimalCommonalities.TryGetValue(animal, out var commonality))
         {
             result = 0f;
         }
         else
         {
-            result = cachedGlobalAnimalCommonalities[animal] / cachedGlobalAnimalCommonalitiesSum;
+            result = commonality / cachedGlobalAnimalCommonalitiesSum;
         }
 
         return result;

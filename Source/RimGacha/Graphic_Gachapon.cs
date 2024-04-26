@@ -181,7 +181,7 @@ public class Graphic_Gachapon : Graphic
             quaternion *= Quaternion.Euler(Vector3.up * extraRotation);
         }
 
-        var unused = new Vector3(loc.x, loc.y - 0.05f, loc.z);
+        _ = new Vector3(loc.x, loc.y - 0.05f, loc.z);
         Graphics.DrawMesh(mesh, loc, quaternion, baseGraphic.MatSingle, 0);
     }
 

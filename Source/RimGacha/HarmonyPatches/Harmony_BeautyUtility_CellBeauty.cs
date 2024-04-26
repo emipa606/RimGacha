@@ -7,9 +7,8 @@ using Verse;
 
 namespace RimGacha;
 
-[HarmonyPatch(typeof(BeautyUtility))]
-[HarmonyPatch("CellBeauty")]
-public class Harmony_BeautyUtility_CellBeauty
+[HarmonyPatch(typeof(BeautyUtility), nameof(BeautyUtility.CellBeauty))]
+public static class Harmony_BeautyUtility_CellBeauty
 {
     private static float BeautyOffsetHelper(Thing thing)
     {

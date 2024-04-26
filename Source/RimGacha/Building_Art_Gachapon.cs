@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -9,10 +8,6 @@ namespace RimGacha;
 
 public class Building_Art_Gachapon : Building_Art
 {
-    private static readonly FieldInfo FI_BlueprintColor =
-        typeof(ThingDefGenerator_Buildings).GetField("BlueprintColor",
-            BindingFlags.Static | BindingFlags.NonPublic);
-
     private static readonly SimpleCurve baseDrawSizeFromBodySize = new SimpleCurve
     {
         {
@@ -73,9 +68,9 @@ public class Building_Art_Gachapon : Building_Art
                     ? pawnKindLifeStage.femaleGraphicData
                     : pawnKindLifeStage.bodyGraphicData;
             var num = baseDrawSizeFromBodySize.Evaluate(animal.race.race.baseBodySize);
-            if (textureExceptionSize.ContainsKey(animal.defName))
+            if (textureExceptionSize.TryGetValue(animal.defName, out var value))
             {
-                num *= textureExceptionSize[animal.defName];
+                num *= value;
             }
 
             graphicDataInt = new GraphicData
@@ -107,7 +102,7 @@ public class Building_Art_Gachapon : Building_Art
             if (cachedBlueprintGraphic == null)
             {
                 cachedBlueprintGraphic = ((Graphic_Gachapon)Graphic).GetColoredVersion(ShaderTypeDefOf.EdgeDetect,
-                    (Color)FI_BlueprintColor.GetValue(null), Color.white, null);
+                    ThingDefGenerator_Buildings.BlueprintColor, Color.white, null);
             }
 
             return cachedBlueprintGraphic;
