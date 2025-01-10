@@ -8,7 +8,7 @@ using Verse;
 namespace RimGacha;
 
 [HarmonyPatch(typeof(BeautyUtility), nameof(BeautyUtility.CellBeauty))]
-public static class Harmony_BeautyUtility_CellBeauty
+public static class BeautyUtility_CellBeauty
 {
     private static float BeautyOffsetHelper(Thing thing)
     {
@@ -39,7 +39,7 @@ public static class Harmony_BeautyUtility_CellBeauty
                 yield return ci;
                 yield return instructions.ElementAt(i + 1);
                 yield return new CodeInstruction(OpCodes.Call,
-                    AccessTools.Method(typeof(Harmony_BeautyUtility_CellBeauty), "BeautyOffsetHelper"));
+                    AccessTools.Method(typeof(BeautyUtility_CellBeauty), "BeautyOffsetHelper"));
                 yield return new CodeInstruction(OpCodes.Ldloc_S, ci.operand);
                 yield return new CodeInstruction(OpCodes.Add);
             }

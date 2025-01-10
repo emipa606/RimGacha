@@ -5,7 +5,7 @@ using Verse;
 namespace RimGacha;
 
 [HarmonyPatch(typeof(GenConstruct), nameof(GenConstruct.BlocksConstruction))]
-public static class Harmony_GenConstruct_BlocksConstruction
+public static class GenConstruct_BlocksConstruction
 {
     public static bool Prefix(ref bool __result, Thing constructible, Thing t)
     {

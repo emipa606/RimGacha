@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Defs>
   <ThingDef Name="GachaponCollectionBase" ParentName="FurnitureWithQualityBase" Abstract="True">
     <thingClass>RimGacha.Building_GachaponCollection</thingClass>

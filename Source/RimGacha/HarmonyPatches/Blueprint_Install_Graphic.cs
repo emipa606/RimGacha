@@ -5,7 +5,7 @@ using Verse;
 namespace RimGacha;
 
 [HarmonyPatch(typeof(Blueprint), nameof(Blueprint.Graphic), MethodType.Getter)]
-public static class Harmony_Blueprint_Install_Graphic
+public static class Blueprint_Install_Graphic
 {
     public static void Postfix(Blueprint __instance, ref Graphic __result)
     {

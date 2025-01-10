@@ -5,7 +5,7 @@ using Verse;
 namespace RimGacha;
 
 [HarmonyPatch(typeof(GenConstruct), nameof(GenConstruct.CanPlaceBlueprintOver))]
-public static class Harmony_GenConstruct_CanPlaceBlueprintOver
+public static class GenConstruct_CanPlaceBlueprintOver
 {
     public static bool Prefix(ref bool __result, BuildableDef newDef, ThingDef oldDef)
     {

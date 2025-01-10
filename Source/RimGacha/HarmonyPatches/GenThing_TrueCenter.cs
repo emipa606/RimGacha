@@ -6,7 +6,7 @@ using Verse;
 namespace RimGacha;
 
 [HarmonyPatch(typeof(GenThing), nameof(GenThing.TrueCenter), typeof(Thing))]
-public static class Harmony_GenThing_TrueCenter
+public static class GenThing_TrueCenter
 {
     public static void Postfix(ref Vector3 __result, Thing t)
     {

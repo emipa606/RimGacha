@@ -6,7 +6,7 @@ using Verse;
 namespace RimGacha;
 
 [HarmonyPatch(typeof(GenRecipe), "PostProcessProduct")]
-public static class Harmony_GenRecipe_PostProcessProduct
+public static class GenRecipe_PostProcessProduct
 {
     public static bool Prefix(ref Thing __result, Thing product, RecipeDef recipeDef)
     {

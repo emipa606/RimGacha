@@ -53,7 +53,7 @@ public class WorldComp_BiomeManager(World world) : WorldComponent(world)
             }
 
             var num2 = pawnKindDef.race.GetStatValueAbstract(StatDefOf.MarketValue);
-            num2 = GenMath.LerpDouble(100f, 5000f, 0.005f, 0.0005f, num2) *
+            num2 = GenMath.LerpDoubleClamped(100f, 5000f, 0.005f, 0.0005f, num2) *
                    cachedGlobalAnimalCommonalitiesSum;
             cachedGlobalAnimalCommonalities.Add(pawnKindDef, num2);
             cachedGlobalAnimalCommonalitiesSum += num2;

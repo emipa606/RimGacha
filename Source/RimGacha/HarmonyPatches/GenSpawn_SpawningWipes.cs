@@ -4,7 +4,7 @@ using Verse;
 namespace RimGacha;
 
 [HarmonyPatch(typeof(GenSpawn), nameof(GenSpawn.SpawningWipes))]
-public static class Harmony_GenSpawn_SpawningWipes
+public static class GenSpawn_SpawningWipes
 {
     public static bool Prefix(ref bool __result, BuildableDef newEntDef, BuildableDef oldEntDef)
     {
