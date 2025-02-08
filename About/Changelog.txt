@@ -1,5 +1,8 @@
 # Changelog for RimGacha
 
+1.5.2 - Changed it to be behind smithing instead to not block tribal-colonies from building it
+
+
 1.5.1 - Fix for some modded animals creating issues, thanks Dragon124515
 
 

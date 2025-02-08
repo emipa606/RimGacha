@@ -34,7 +34,9 @@
       <WoodLog>20</WoodLog>
     </costList>
     <constructionSkillPrerequisite>3</constructionSkillPrerequisite>
-    <minTechLevelToBuild>Industrial</minTechLevelToBuild>
+    <researchPrerequisites>
+      <li>Smithing</li>
+    </researchPrerequisites>
     <designationCategory>Misc</designationCategory>
     <hasInteractionCell>True</hasInteractionCell>
     <interactionCellOffset>(1,0,-1)</interactionCellOffset>
