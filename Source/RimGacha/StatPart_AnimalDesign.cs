@@ -14,10 +14,10 @@ public class StatPart_AnimalDesign : StatPart
             return;
         }
 
-        var comp_AnimalDesign = req.Thing.TryGetComp<Comp_AnimalDesign>();
-        if (comp_AnimalDesign != null)
+        var compAnimalDesign = req.Thing.TryGetComp<Comp_AnimalDesign>();
+        if (compAnimalDesign != null)
         {
-            val *= Multiplier(req.Thing);
+            val *= multiplier(req.Thing);
         }
     }
 
@@ -31,20 +31,20 @@ public class StatPart_AnimalDesign : StatPart
         else
         {
             result = "StatsReport_AnimalDesignMultiplier".Translate() + ": x" +
-                     Multiplier(req.Thing).ToStringPercent();
+                     multiplier(req.Thing).ToStringPercent();
         }
 
         return result;
     }
 
-    private float Multiplier(Thing thing)
+    private float multiplier(Thing thing)
     {
         var num = 1f;
-        var comp_AnimalDesign = thing.TryGetComp<Comp_AnimalDesign>();
-        if (comp_AnimalDesign != null)
+        var compAnimalDesign = thing.TryGetComp<Comp_AnimalDesign>();
+        if (compAnimalDesign != null)
         {
             num *= projectionCurve.Evaluate(Find.World.GetComponent<WorldComp_BiomeManager>()
-                .GetGlobalAnimalRarity(comp_AnimalDesign.Animal));
+                .GetGlobalAnimalRarity(compAnimalDesign.Animal));
         }
 
         return num;

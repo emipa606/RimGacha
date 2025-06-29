@@ -17,12 +17,12 @@ public static class GenThing_TrueCenter
 
         if (t.def != ThingDefOf.Gachapon)
         {
-            if (t is not Blueprint_Install blueprint_Install)
+            if (t is not Blueprint_Install blueprintInstall)
             {
                 return;
             }
 
-            if (blueprint_Install.MiniToInstallOrBuildingToReinstall?.GetInnerIfMinified()
+            if (blueprintInstall.MiniToInstallOrBuildingToReinstall?.GetInnerIfMinified()
                     ?.def != ThingDefOf.Gachapon)
             {
                 return;

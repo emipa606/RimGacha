@@ -4,7 +4,7 @@ namespace RimGacha;
 
 public static class DictionaryExtension
 {
-    public static void EnsureKey<K, V>(this Dictionary<K, V> dict, K key, V fallbackVal)
+    public static void EnsureKey<TK, TV>(this Dictionary<TK, TV> dict, TK key, TV fallbackVal)
     {
         dict.TryAdd(key, fallbackVal);
     }

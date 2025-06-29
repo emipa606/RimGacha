@@ -14,13 +14,13 @@ public static class GenConstruct_BlocksConstruction
             return true;
         }
 
-        Blueprint_Install blueprint_Install;
-        if ((blueprint_Install = constructible as Blueprint_Install) == null)
+        Blueprint_Install blueprintInstall;
+        if ((blueprintInstall = constructible as Blueprint_Install) == null)
         {
             return true;
         }
 
-        if (blueprint_Install.MiniToInstallOrBuildingToReinstall.GetInnerIfMinified().def != ThingDefOf.Gachapon)
+        if (blueprintInstall.MiniToInstallOrBuildingToReinstall.GetInnerIfMinified().def != ThingDefOf.Gachapon)
         {
             return true;
         }

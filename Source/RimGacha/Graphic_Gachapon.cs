@@ -44,10 +44,10 @@ public class Graphic_Gachapon : Graphic
         colorTwo = req.colorTwo;
         drawSize = req.drawSize;
         var array = new Texture2D[mats.Length];
-        array[0] = ContentFinder<Texture2D>.Get(req.path + "_south", false);
-        array[1] = ContentFinder<Texture2D>.Get(req.path + "_west", false);
-        array[2] = ContentFinder<Texture2D>.Get(req.path + "_north", false);
-        array[3] = ContentFinder<Texture2D>.Get(req.path + "_east", false);
+        array[0] = ContentFinder<Texture2D>.Get($"{req.path}_south", false);
+        array[1] = ContentFinder<Texture2D>.Get($"{req.path}_west", false);
+        array[2] = ContentFinder<Texture2D>.Get($"{req.path}_north", false);
+        array[3] = ContentFinder<Texture2D>.Get($"{req.path}_east", false);
         if (array[0] == null)
         {
             if (array[2] != null)
@@ -67,8 +67,7 @@ public class Graphic_Gachapon : Graphic
                     if (!(array[3] != null))
                     {
                         Log.Error(
-                            "Failed to find any texture while constructing " + this.ToStringSafe() +
-                            ". Filenames have changed; if you are converting an old mod, recommend renaming textures from *_back to *_north, *_side to *_east, and *_front to *_south.");
+                            $"Failed to find any texture while constructing {this.ToStringSafe()}. Filenames have changed; if you are converting an old mod, recommend renaming textures from *_back to *_north, *_side to *_east, and *_front to *_south.");
                         return;
                     }
 
@@ -195,7 +194,7 @@ public class Graphic_Gachapon : Graphic
 
     public override string ToString()
     {
-        return string.Concat("Gachapon(initPath=", path, ", color=", color, ", colorTwo=", colorTwo, ")");
+        return $"Gachapon(initPath={path}, color={color}, colorTwo={colorTwo})";
     }
 
     public override int GetHashCode()

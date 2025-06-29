@@ -1,5 +1,8 @@
 # Changelog for RimGacha
 
+1.6.0 - Mod updated for 1.6 and passed autotests
+
+
 1.5.2 - Changed it to be behind smithing instead to not block tribal-colonies from building it
 
 

@@ -251,14 +251,14 @@ public class Building_GachaponCollection : Building
                 var c = new IntVec3(j, 0, i);
                 foreach (var thing in Map.thingGrid.ThingsAt(c))
                 {
-                    Building_Art_Gachapon building_Art_Gachapon;
-                    if ((building_Art_Gachapon = thing as Building_Art_Gachapon) == null)
+                    Building_Art_Gachapon buildingArtGachapon;
+                    if ((buildingArtGachapon = thing as Building_Art_Gachapon) == null)
                     {
                         continue;
                     }
 
-                    Register(building_Art_Gachapon);
-                    Map.edificeGrid.InnerArray[cellIndices.CellToIndex(c)] = building_Art_Gachapon;
+                    Register(buildingArtGachapon);
+                    Map.edificeGrid.InnerArray[cellIndices.CellToIndex(c)] = buildingArtGachapon;
                     break;
                 }
             }
@@ -270,21 +270,21 @@ public class Building_GachaponCollection : Building
         base.DeSpawn(mode);
         collection.Clear();
         CalculateCollectionBaseBeauty();
-        CalculateCollectionSets();
+        calculateCollectionSets();
     }
 
     public void Register(Building_Art_Gachapon building)
     {
         collection.Add(building);
         CalculateCollectionBaseBeauty();
-        CalculateCollectionSets();
+        calculateCollectionSets();
     }
 
     public void DeRegister(Building_Art_Gachapon building)
     {
         collection.Remove(building);
         CalculateCollectionBaseBeauty();
-        CalculateCollectionSets();
+        calculateCollectionSets();
     }
 
     private void CalculateCollectionBaseBeauty()
@@ -315,11 +315,11 @@ public class Building_GachaponCollection : Building
             j++;
         }
 
-        num += array[array.Length - 1] * 0.8f;
+        num += array[^1] * 0.8f;
         cachedBaseBeauty = num;
     }
 
-    private void CalculateCollectionSets()
+    private void calculateCollectionSets()
     {
         cachedSetState_Material = false;
         cachedSetState_Animal = false;

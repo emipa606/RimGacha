@@ -10,12 +10,12 @@ namespace RimGacha;
 [HarmonyPatch(typeof(BeautyUtility), nameof(BeautyUtility.CellBeauty))]
 public static class BeautyUtility_CellBeauty
 {
-    private static float BeautyOffsetHelper(Thing thing)
+    private static float beautyOffsetHelper(Thing thing)
     {
         float result;
-        if (thing is Building_GachaponCollection building_GachaponCollection)
+        if (thing is Building_GachaponCollection buildingGachaponCollection)
         {
-            result = building_GachaponCollection.BeautyOffset;
+            result = buildingGachaponCollection.BeautyOffset;
         }
         else
         {
@@ -28,18 +28,19 @@ public static class BeautyUtility_CellBeauty
     public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions, ILGenerator il)
     {
         var i = 0;
-        var iLen = instructions.Count();
+        var codeInstructions = instructions as CodeInstruction[] ?? instructions.ToArray();
+        var iLen = codeInstructions.Count();
         while (i < iLen)
         {
-            var ci = instructions.ElementAt(i);
-            if (ci.opcode == OpCodes.Stloc_S && instructions.ElementAt(i - 1).opcode == OpCodes.Call &&
-                instructions.ElementAt(i - 2).opcode == OpCodes.Ldc_I4_1 &&
-                instructions.ElementAt(i - 3).opcode == OpCodes.Ldsfld)
+            var ci = codeInstructions.ElementAt(i);
+            if (ci.opcode == OpCodes.Stloc_S && codeInstructions.ElementAt(i - 1).opcode == OpCodes.Call &&
+                codeInstructions.ElementAt(i - 2).opcode == OpCodes.Ldc_I4_1 &&
+                codeInstructions.ElementAt(i - 3).opcode == OpCodes.Ldsfld)
             {
                 yield return ci;
-                yield return instructions.ElementAt(i + 1);
+                yield return codeInstructions.ElementAt(i + 1);
                 yield return new CodeInstruction(OpCodes.Call,
-                    AccessTools.Method(typeof(BeautyUtility_CellBeauty), "BeautyOffsetHelper"));
+                    AccessTools.Method(typeof(BeautyUtility_CellBeauty), nameof(beautyOffsetHelper)));
                 yield return new CodeInstruction(OpCodes.Ldloc_S, ci.operand);
                 yield return new CodeInstruction(OpCodes.Add);
             }

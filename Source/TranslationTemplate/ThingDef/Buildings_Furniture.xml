@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <!-- EN: gachapon display table (2x2) -->
+  <GachaponCollection2x2c.label>gachapon display table (2x2)</GachaponCollection2x2c.label>
+  <!-- EN: A small table to place gacha figures on to display them nicely. -->
+  <GachaponCollection2x2c.description>A small table to place gacha figures on to display them nicely.</GachaponCollection2x2c.description>
+  <!-- EN: gachapon display table (4x1) -->
+  <GachaponCollection4x1c.label>gachapon display table (4x1)</GachaponCollection4x1c.label>
+  <!-- EN: A small table to place gacha figures on to display them nicely. -->
+  <GachaponCollection4x1c.description>A small table to place gacha figures on to display them nicely.</GachaponCollection4x1c.description>
+</LanguageData>

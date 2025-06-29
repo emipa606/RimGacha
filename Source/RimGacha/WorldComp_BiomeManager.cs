@@ -11,8 +11,7 @@ public class WorldComp_BiomeManager(World world) : WorldComponent(world)
     private static readonly FieldInfo FI_cachedAnimalCommonalities =
         typeof(BiomeDef).GetField("cachedAnimalCommonalities", BindingFlags.Instance | BindingFlags.NonPublic);
 
-    private static readonly KeyValuePair<PawnKindDef, float> fallbackAnimalKVP =
-        new KeyValuePair<PawnKindDef, float>(PawnKindDefOf.Muffalo, 0f);
+    private static readonly KeyValuePair<PawnKindDef, float> fallbackAnimalKvp = new(PawnKindDefOf.Muffalo, 0f);
 
     [Unsaved] private Dictionary<PawnKindDef, float> cachedGlobalAnimalCommonalities;
 
@@ -29,9 +28,9 @@ public class WorldComp_BiomeManager(World world) : WorldComponent(world)
         }
 
         cachedGlobalAnimalCommonalities = new Dictionary<PawnKindDef, float>();
-        foreach (var tile in world.grid.tiles)
+        foreach (var tile in world.grid.Tiles)
         {
-            var biome = tile.biome;
+            var biome = tile.PrimaryBiome;
             biome.CommonalityOfAnimal(PawnKindDefOf.Muffalo);
             var dictionary = (Dictionary<PawnKindDef, float>)FI_cachedAnimalCommonalities.GetValue(biome);
             foreach (var keyValuePair in dictionary)
@@ -63,7 +62,7 @@ public class WorldComp_BiomeManager(World world) : WorldComponent(world)
     public PawnKindDef GetRandomGlobalAnimalWeighted()
     {
         CreateGlobalAnimalCacheIfNeeded();
-        return cachedGlobalAnimalCommonalities.RandomElementByWeightWithFallback(x => x.Value, fallbackAnimalKVP)
+        return cachedGlobalAnimalCommonalities.RandomElementByWeightWithFallback(x => x.Value, fallbackAnimalKvp)
             .Key;
     }
 

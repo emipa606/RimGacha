@@ -21,12 +21,12 @@ public static class Blueprint_Install_Graphic
             return;
         }
 
-        if (innerThing is not Building_Art_Gachapon building_Art_Gachapon)
+        if (innerThing is not Building_Art_Gachapon buildingArtGachapon)
         {
             return;
         }
 
-        var foundGraphic = building_Art_Gachapon.BlueprintGraphic;
+        var foundGraphic = buildingArtGachapon.BlueprintGraphic;
         __result = foundGraphic;
     }
 }

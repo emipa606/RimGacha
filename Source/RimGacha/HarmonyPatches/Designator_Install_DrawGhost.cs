@@ -20,12 +20,12 @@ public static class Designator_Install_DrawGhost
             return true;
         }
 
-        if (thing is not Building_Art_Gachapon building_Art_Gachapon)
+        if (thing is not Building_Art_Gachapon buildingArtGachapon)
         {
             return true;
         }
 
-        var ghostGraphic = building_Art_Gachapon.GetGhostGraphic(ghostCol);
+        var ghostGraphic = buildingArtGachapon.GetGhostGraphic(ghostCol);
         GachaponGhostDrawer.DrawGhostThing(UI.MouseCell(), ___placingRot, (ThingDef)__instance.PlacingDef, ghostGraphic,
             AltitudeLayer.PawnState);
         return false;

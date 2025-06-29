@@ -38,6 +38,6 @@ public class Comp_AnimalDesign : ThingComp
     public override string TransformLabel(string label)
     {
         var array = label.Split(' ');
-        return string.Concat(array[0], " ", animalInt.label, " ", string.Join(" ", array, 1, array.Length - 1));
+        return $"{array[0]} {animalInt.label} {string.Join(" ", array, 1, array.Length - 1)}";
     }
 }

@@ -8,7 +8,7 @@ namespace RimGacha;
 
 public class Building_Art_Gachapon : Building_Art
 {
-    private static readonly SimpleCurve baseDrawSizeFromBodySize = new SimpleCurve
+    private static readonly SimpleCurve baseDrawSizeFromBodySize = new()
     {
         {
             0.2f,
@@ -28,7 +28,7 @@ public class Building_Art_Gachapon : Building_Art
         }
     };
 
-    private static readonly Dictionary<string, float> textureExceptionSize = new Dictionary<string, float>
+    private static readonly Dictionary<string, float> textureExceptionSize = new()
     {
         {
             "Ostrich",
@@ -99,40 +99,30 @@ public class Building_Art_Gachapon : Building_Art
     {
         get
         {
-            if (cachedBlueprintGraphic == null)
-            {
-                cachedBlueprintGraphic = ((Graphic_Gachapon)Graphic).GetColoredVersion(ShaderTypeDefOf.EdgeDetect,
-                    ThingDefGenerator_Buildings.BlueprintColor, Color.white, null);
-            }
+            cachedBlueprintGraphic ??= ((Graphic_Gachapon)Graphic).GetColoredVersion(ShaderTypeDefOf.EdgeDetect,
+                ThingDefGenerator_Buildings.BlueprintColor, Color.white, null);
 
             return cachedBlueprintGraphic;
         }
     }
 
-    public Graphic GhostGraphicValid
+    private Graphic GhostGraphicValid
     {
         get
         {
-            if (cachedGhostGraphicValid == null)
-            {
-                cachedGhostGraphicValid = ((Graphic_Gachapon)Graphic).GetColoredVersion(ShaderTypeDefOf.EdgeDetect,
-                    Designator_Place.CanPlaceColor, Color.white, null);
-            }
+            cachedGhostGraphicValid ??= ((Graphic_Gachapon)Graphic).GetColoredVersion(ShaderTypeDefOf.EdgeDetect,
+                Designator_Place.CanPlaceColor, Color.white, null);
 
             return cachedGhostGraphicValid;
         }
     }
 
-    public Graphic GhostGraphicInvalid
+    private Graphic GhostGraphicInvalid
     {
         get
         {
-            if (cachedGhostGraphicInvalid == null)
-            {
-                cachedGhostGraphicInvalid =
-                    ((Graphic_Gachapon)Graphic).GetColoredVersion(ShaderTypeDefOf.EdgeDetect,
-                        Designator_Place.CannotPlaceColor, Color.white, null);
-            }
+            cachedGhostGraphicInvalid ??= ((Graphic_Gachapon)Graphic).GetColoredVersion(ShaderTypeDefOf.EdgeDetect,
+                Designator_Place.CannotPlaceColor, Color.white, null);
 
             return cachedGhostGraphicInvalid;
         }
@@ -147,10 +137,10 @@ public class Building_Art_Gachapon : Building_Art
 
     public override void SpawnSetup(Map map, bool respawningAfterLoad)
     {
-        Building_GachaponCollection building_GachaponCollection;
-        if ((building_GachaponCollection = map.edificeGrid[Position] as Building_GachaponCollection) != null)
+        Building_GachaponCollection buildingGachaponCollection;
+        if ((buildingGachaponCollection = map.edificeGrid[Position] as Building_GachaponCollection) != null)
         {
-            building_GachaponCollection.Register(this);
+            buildingGachaponCollection.Register(this);
         }
 
         base.SpawnSetup(map, respawningAfterLoad);
@@ -160,23 +150,23 @@ public class Building_Art_Gachapon : Building_Art
     {
         var map = Map;
         var position = Position;
-        Building_GachaponCollection building_GachaponCollection = null;
+        Building_GachaponCollection buildingGachaponCollection = null;
         foreach (var thing in map.thingGrid.ThingsAt(position))
         {
-            building_GachaponCollection = thing as Building_GachaponCollection;
-            if (building_GachaponCollection != null)
+            buildingGachaponCollection = thing as Building_GachaponCollection;
+            if (buildingGachaponCollection != null)
             {
                 break;
             }
         }
 
         base.DeSpawn(mode);
-        if (building_GachaponCollection == null)
+        if (buildingGachaponCollection == null)
         {
             return;
         }
 
-        building_GachaponCollection.DeRegister(this);
-        map.edificeGrid.InnerArray[map.cellIndices.CellToIndex(position)] = building_GachaponCollection;
+        buildingGachaponCollection.DeRegister(this);
+        map.edificeGrid.InnerArray[map.cellIndices.CellToIndex(position)] = buildingGachaponCollection;
     }
 }

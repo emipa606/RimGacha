@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <!-- EN: deaw gacha figure -->
+  <Make_Gachapon.label>deaw gacha figure</Make_Gachapon.label>
+  <!-- EN: Pay silver to get a random gacha figure. Gambling time! -->
+  <Make_Gachapon.description>Pay silver to get a random gacha figure. Gambling time!</Make_Gachapon.description>
+  <!-- EN: Getting gacha figure. -->
+  <Make_Gachapon.jobString>Getting gacha figure.</Make_Gachapon.jobString>
+</LanguageData>
