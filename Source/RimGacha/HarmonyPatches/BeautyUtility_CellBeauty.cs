@@ -29,16 +29,16 @@ public static class BeautyUtility_CellBeauty
     {
         var i = 0;
         var codeInstructions = instructions as CodeInstruction[] ?? instructions.ToArray();
-        var iLen = codeInstructions.Count();
+        var iLen = codeInstructions.Length;
         while (i < iLen)
         {
-            var ci = codeInstructions.ElementAt(i);
-            if (ci.opcode == OpCodes.Stloc_S && codeInstructions.ElementAt(i - 1).opcode == OpCodes.Call &&
-                codeInstructions.ElementAt(i - 2).opcode == OpCodes.Ldc_I4_1 &&
-                codeInstructions.ElementAt(i - 3).opcode == OpCodes.Ldsfld)
+            var ci = codeInstructions[i];
+            if (ci.opcode == OpCodes.Stloc_S && codeInstructions[i - 1].opcode == OpCodes.Call &&
+                codeInstructions[i - 2].opcode == OpCodes.Ldc_I4_1 &&
+                codeInstructions[i - 3].opcode == OpCodes.Ldsfld)
             {
                 yield return ci;
-                yield return codeInstructions.ElementAt(i + 1);
+                yield return codeInstructions[i + 1];
                 yield return new CodeInstruction(OpCodes.Call,
                     AccessTools.Method(typeof(BeautyUtility_CellBeauty), nameof(beautyOffsetHelper)));
                 yield return new CodeInstruction(OpCodes.Ldloc_S, ci.operand);

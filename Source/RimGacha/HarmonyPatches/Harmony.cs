@@ -4,7 +4,7 @@ using Verse;
 namespace RimGacha.HarmonyPatches;
 
 [StaticConstructorOnStartup]
-public class Harmony
+public static class Harmony
 {
     static Harmony()
     {

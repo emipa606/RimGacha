@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using RimWorld;
 using RimWorld.Planet;
@@ -28,11 +29,15 @@ public class WorldComp_BiomeManager(World world) : WorldComponent(world)
         }
 
         cachedGlobalAnimalCommonalities = new Dictionary<PawnKindDef, float>();
-        foreach (var tile in world.grid.Tiles)
+        foreach (var biome in world.grid.Tiles.Select(tile => tile.PrimaryBiome))
         {
-            var biome = tile.PrimaryBiome;
             biome.CommonalityOfAnimal(PawnKindDefOf.Muffalo);
             var dictionary = (Dictionary<PawnKindDef, float>)FI_cachedAnimalCommonalities.GetValue(biome);
+            if (dictionary == null)
+            {
+                continue;
+            }
+
             foreach (var keyValuePair in dictionary)
             {
                 var num = keyValuePair.Value * biome.animalDensity;

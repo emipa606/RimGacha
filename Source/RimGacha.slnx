@@ -3,4 +3,27 @@
     <BuildType Name="Release" />
   </Configurations>
   <Project Path="RimGacha/RimGacha.csproj" />
+  <Folder Name="/.github/">
+    <File Path="../.github/copilot-instructions.md" />
+  </Folder>
+  <Folder Name="/XML/Languages/English/Keyed/">
+    <File Path="../Languages/English/Keyed/All.xml" />
+  </Folder>
+  <Folder Name="/XML/Patches/">
+    <File Path="../Patches/Stats_Stats_Basics_General.xml" />
+  </Folder>
+  <Folder Name="/XML/1.7/Defs/WorkGiverDefs/">
+    <File Path="../1.7/Defs/WorkGiverDefs/WorkGivers.xml" />
+  </Folder>
+  <Folder Name="/XML/About/">
+    <File Path="../About/about.xml" />
+  </Folder>
+  <Folder Name="/XML/1.7/Defs/ThingDefs_Buildings/">
+    <File Path="../1.7/Defs/ThingDefs_Buildings/Buildings_Art.xml" />
+    <File Path="../1.7/Defs/ThingDefs_Buildings/Buildings_Furniture.xml" />
+    <File Path="../1.7/Defs/ThingDefs_Buildings/Buildings_Misc.xml" />
+  </Folder>
+  <Folder Name="/XML/1.7/Defs/RecipeDefs/">
+    <File Path="../1.7/Defs/RecipeDefs/Recipes_Misc.xml" />
+  </Folder>
 </Solution>

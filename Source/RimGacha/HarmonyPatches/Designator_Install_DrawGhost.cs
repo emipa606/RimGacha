@@ -15,7 +15,7 @@ public static class Designator_Install_DrawGhost
     public static bool Prefix(Designator_Install __instance, Color ghostCol, Rot4 ___placingRot)
     {
         var thing = (Thing)PI_ThingToInstall.GetValue(__instance, null);
-        if (thing.def != ThingDefOf.Gachapon)
+        if (thing?.def != ThingDefOf.Gachapon)
         {
             return true;
         }

@@ -1,202 +1,205 @@
 using System;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering;
 using Verse;
 
 namespace RimGacha;
 
 public static class Texture2DExtension
 {
-    public static Texture2D CreateReadableCopy(this Texture2D tex)
+    extension(Texture2D tex)
     {
-        var temporary = RenderTexture.GetTemporary(tex.width, tex.height, 0, GraphicsFormat.R8G8B8A8_UNorm, 1);
-        Graphics.Blit(tex, temporary);
-        var active = RenderTexture.active;
-        RenderTexture.active = temporary;
-        var texture2D = new Texture2D(tex.width, tex.height);
-        texture2D.ReadPixels(new Rect(0f, 0f, temporary.width, temporary.height), 0, 0);
-        texture2D.Apply();
-        RenderTexture.active = active;
-        RenderTexture.ReleaseTemporary(temporary);
-        return texture2D;
-    }
-
-    public static void Desatuate(this Texture2D tex)
-    {
-        var pixels = tex.GetPixels32();
-        var num = tex.height * tex.width;
-        for (var i = 0; i < num; i++)
+        public Texture2D CreateReadableCopy()
         {
-            var color = pixels[i];
-            var b = (byte)Math.Round((color.r + (float)color.g + color.b) / 3f);
-            pixels[i] = new Color32(b, b, b, color.a);
+            var temporary = RenderTexture.GetTemporary(tex.width, tex.height, 0, RenderTextureFormat.ARGB2101010,
+                RenderTextureReadWrite.Linear);
+            Graphics.Blit(tex, temporary);
+            var active = RenderTexture.active;
+            RenderTexture.active = temporary;
+            var texture2D = new Texture2D(tex.width, tex.height);
+            texture2D.ReadPixels(new Rect(0f, 0f, temporary.width, temporary.height), 0, 0);
+            texture2D.Apply();
+            RenderTexture.active = active;
+            RenderTexture.ReleaseTemporary(temporary);
+            return texture2D;
         }
 
-        tex.SetPixels32(pixels);
-        tex.Apply();
-    }
-
-    public static void NormalizeContrastGreyscale(this Texture2D tex, byte alphaThreshold = 0)
-    {
-        var pixels = tex.GetPixels32();
-        var num = tex.height * tex.width;
-        var array = new int[256];
-        var num2 = 0;
-        var num3 = 0f;
-        for (var i = 0; i < num; i++)
+        public void Desatuate()
         {
-            if (pixels[i].a <= alphaThreshold)
+            var pixels = tex.GetPixels32();
+            var num = tex.height * tex.width;
+            for (var i = 0; i < num; i++)
             {
-                continue;
+                var color = pixels[i];
+                var b = (byte)Math.Round((color.r + (float)color.g + color.b) / 3f);
+                pixels[i] = new Color32(b, b, b, color.a);
             }
 
-            array[pixels[i].r]++;
-            num2++;
-            num3 += pixels[i].r;
+            tex.SetPixels32(pixels);
+            tex.Apply();
         }
 
-        num3 /= num2;
-        var num4 = GenMath.LerpDouble(255f, 64f, 0.01f, 0.2f, num3);
-        var num5 = (int)Math.Round(num2 * num4);
-        var num6 = 0;
-        for (var j = 255; j >= 0; j--)
+        public void NormalizeContrastGreyscale(byte alphaThreshold = 0)
         {
-            num5 -= array[j];
-            if (num5 >= 0)
+            var pixels = tex.GetPixels32();
+            var num = tex.height * tex.width;
+            var array = new int[256];
+            var num2 = 0;
+            var num3 = 0f;
+            for (var i = 0; i < num; i++)
             {
-                continue;
-            }
+                if (pixels[i].a <= alphaThreshold)
+                {
+                    continue;
+                }
 
-            num6 = j;
-            break;
-        }
-
-        for (var k = 0; k < num; k++)
-        {
-            if (pixels[k].a <= alphaThreshold)
-            {
-                continue;
-            }
-
-            var color = pixels[k];
-            var b = (byte)Math.Round(Mathf.Clamp(GenMath.LerpDouble(8f, num6, 0f, 255f, color.r), 0f, 255f));
-            pixels[k] = new Color32(b, b, b, color.a);
-        }
-
-        tex.SetPixels32(pixels);
-        tex.Apply();
-    }
-
-    public static int CountFilledPixel(this Texture2D tex, byte alphaThreshold = 0)
-    {
-        var pixels = tex.GetPixels32();
-        var num = tex.height * tex.width;
-        var num2 = 0;
-        for (var i = 0; i < num; i++)
-        {
-            if (pixels[i].a > alphaThreshold)
-            {
+                array[pixels[i].r]++;
                 num2++;
+                num3 += pixels[i].r;
             }
+
+            num3 /= num2;
+            var num4 = GenMath.LerpDouble(255f, 64f, 0.01f, 0.2f, num3);
+            var num5 = (int)Math.Round(num2 * num4);
+            var num6 = 0;
+            for (var j = 255; j >= 0; j--)
+            {
+                num5 -= array[j];
+                if (num5 >= 0)
+                {
+                    continue;
+                }
+
+                num6 = j;
+                break;
+            }
+
+            for (var k = 0; k < num; k++)
+            {
+                if (pixels[k].a <= alphaThreshold)
+                {
+                    continue;
+                }
+
+                var color = pixels[k];
+                var b = (byte)Math.Round(Mathf.Clamp(GenMath.LerpDouble(8f, num6, 0f, 255f, color.r), 0f, 255f));
+                pixels[k] = new Color32(b, b, b, color.a);
+            }
+
+            tex.SetPixels32(pixels);
+            tex.Apply();
         }
 
-        return num2;
-    }
-
-    public static int[] GetPadding(this Texture2D tex, byte alphaThreshold = 0, float pixelTolerance = 0f)
-    {
-        var array = new int[4];
-        var pixels = tex.GetPixels32();
-        var num = tex.height * tex.width;
-        var num2 = 0;
-        if (pixelTolerance > 0f)
+        public int CountFilledPixel(byte alphaThreshold = 0)
         {
-            var num3 = 0;
+            var pixels = tex.GetPixels32();
+            var num = tex.height * tex.width;
+            var num2 = 0;
             for (var i = 0; i < num; i++)
             {
                 if (pixels[i].a > alphaThreshold)
                 {
-                    num3++;
+                    num2++;
                 }
             }
 
-            num2 = (int)Math.Round(num3 * pixelTolerance);
+            return num2;
         }
 
-        var num4 = 0;
-        for (var j = 0; j < num; j++)
+        public int[] GetPadding(byte alphaThreshold = 0, float pixelTolerance = 0f)
         {
-            if (pixels[j].a <= alphaThreshold)
+            var array = new int[4];
+            var pixels = tex.GetPixels32();
+            var num = tex.height * tex.width;
+            var num2 = 0;
+            if (pixelTolerance > 0f)
             {
-                continue;
+                var num3 = 0;
+                for (var i = 0; i < num; i++)
+                {
+                    if (pixels[i].a > alphaThreshold)
+                    {
+                        num3++;
+                    }
+                }
+
+                num2 = (int)Math.Round(num3 * pixelTolerance);
             }
 
-            num4++;
-            if (num4 <= num2)
+            var num4 = 0;
+            for (var j = 0; j < num; j++)
             {
-                continue;
+                if (pixels[j].a <= alphaThreshold)
+                {
+                    continue;
+                }
+
+                num4++;
+                if (num4 <= num2)
+                {
+                    continue;
+                }
+
+                array[0] = (int)(j / (float)tex.width);
+                break;
             }
 
-            array[0] = (int)(j / (float)tex.width);
-            break;
+            num4 = 0;
+            for (var k = num - 1; k >= 0; k--)
+            {
+                var num5 = (k % tex.width * tex.height) + (k / tex.width);
+                if (pixels[num5].a <= alphaThreshold)
+                {
+                    continue;
+                }
+
+                num4++;
+                if (num4 <= num2)
+                {
+                    continue;
+                }
+
+                array[1] = tex.width - (int)Math.Ceiling(num5 % (float)tex.width);
+                break;
+            }
+
+            num4 = 0;
+            for (var l = num - 1; l >= 0; l--)
+            {
+                if (pixels[l].a <= alphaThreshold)
+                {
+                    continue;
+                }
+
+                num4++;
+                if (num4 <= num2)
+                {
+                    continue;
+                }
+
+                array[2] = tex.height - (int)Math.Ceiling(l / (float)tex.width);
+                break;
+            }
+
+            num4 = 0;
+            for (var m = 0; m < num; m++)
+            {
+                var num6 = (m % tex.width * tex.height) + (m / tex.width);
+                if (pixels[num6].a <= alphaThreshold)
+                {
+                    continue;
+                }
+
+                num4++;
+                if (num4 <= num2)
+                {
+                    continue;
+                }
+
+                array[3] = (int)(num6 % (float)tex.width);
+                break;
+            }
+
+            return array;
         }
-
-        num4 = 0;
-        for (var k = num - 1; k >= 0; k--)
-        {
-            var num5 = (k % tex.width * tex.height) + (k / tex.width);
-            if (pixels[num5].a <= alphaThreshold)
-            {
-                continue;
-            }
-
-            num4++;
-            if (num4 <= num2)
-            {
-                continue;
-            }
-
-            array[1] = tex.width - (int)Math.Ceiling(num5 % (float)tex.width);
-            break;
-        }
-
-        num4 = 0;
-        for (var l = num - 1; l >= 0; l--)
-        {
-            if (pixels[l].a <= alphaThreshold)
-            {
-                continue;
-            }
-
-            num4++;
-            if (num4 <= num2)
-            {
-                continue;
-            }
-
-            array[2] = tex.height - (int)Math.Ceiling(l / (float)tex.width);
-            break;
-        }
-
-        num4 = 0;
-        for (var m = 0; m < num; m++)
-        {
-            var num6 = (m % tex.width * tex.height) + (m / tex.width);
-            if (pixels[num6].a <= alphaThreshold)
-            {
-                continue;
-            }
-
-            num4++;
-            if (num4 <= num2)
-            {
-                continue;
-            }
-
-            array[3] = (int)(num6 % (float)tex.width);
-            break;
-        }
-
-        return array;
     }
 }

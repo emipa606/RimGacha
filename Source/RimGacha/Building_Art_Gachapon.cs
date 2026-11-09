@@ -44,12 +44,6 @@ public class Building_Art_Gachapon : Building_Art
         }
     };
 
-    private Graphic cachedBlueprintGraphic;
-
-    private Graphic cachedGhostGraphicInvalid;
-
-    private Graphic cachedGhostGraphicValid;
-
     private GraphicData graphicDataInt;
 
     public override Graphic Graphic
@@ -99,10 +93,10 @@ public class Building_Art_Gachapon : Building_Art
     {
         get
         {
-            cachedBlueprintGraphic ??= ((Graphic_Gachapon)Graphic).GetColoredVersion(ShaderTypeDefOf.EdgeDetect,
+            field ??= ((Graphic_Gachapon)Graphic).GetColoredVersion(ShaderTypeDefOf.EdgeDetect,
                 ThingDefGenerator_Buildings.BlueprintColor, Color.white, null);
 
-            return cachedBlueprintGraphic;
+            return field;
         }
     }
 
@@ -110,10 +104,10 @@ public class Building_Art_Gachapon : Building_Art
     {
         get
         {
-            cachedGhostGraphicValid ??= ((Graphic_Gachapon)Graphic).GetColoredVersion(ShaderTypeDefOf.EdgeDetect,
+            field ??= ((Graphic_Gachapon)Graphic).GetColoredVersion(ShaderTypeDefOf.EdgeDetect,
                 Designator_Place.CanPlaceColor, Color.white, null);
 
-            return cachedGhostGraphicValid;
+            return field;
         }
     }
 
@@ -121,10 +115,10 @@ public class Building_Art_Gachapon : Building_Art
     {
         get
         {
-            cachedGhostGraphicInvalid ??= ((Graphic_Gachapon)Graphic).GetColoredVersion(ShaderTypeDefOf.EdgeDetect,
+            field ??= ((Graphic_Gachapon)Graphic).GetColoredVersion(ShaderTypeDefOf.EdgeDetect,
                 Designator_Place.CannotPlaceColor, Color.white, null);
 
-            return cachedGhostGraphicInvalid;
+            return field;
         }
     }
 

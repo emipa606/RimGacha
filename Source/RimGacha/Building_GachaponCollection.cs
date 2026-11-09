@@ -369,12 +369,12 @@ public class Building_GachaponCollection : Building
             if (list.Count > 0)
             {
                 list.Sort((b1, b2) =>
-                    ((Dictionary<PawnKindDef, float>)FI_cachedAnimalCommonalities.GetValue(b1)).Count
-                    .CompareTo(((Dictionary<PawnKindDef, float>)FI_cachedAnimalCommonalities.GetValue(b2))
+                    ((Dictionary<PawnKindDef, float>)FI_cachedAnimalCommonalities.GetValue(b1))!.Count
+                    .CompareTo(((Dictionary<PawnKindDef, float>)FI_cachedAnimalCommonalities.GetValue(b2))!
                         .Count));
-                cachedSetDef_Biome = list.Last();
+                cachedSetDef_Biome = list[^1];
                 var num =
-                    ((Dictionary<PawnKindDef, float>)FI_cachedAnimalCommonalities.GetValue(cachedSetDef_Biome))
+                    ((Dictionary<PawnKindDef, float>)FI_cachedAnimalCommonalities.GetValue(cachedSetDef_Biome))!
                     .Count / (float)Find.World.GetComponent<WorldComp_BiomeManager>().GlobalAnimalDefCount;
                 if (num < 0.1f)
                 {
